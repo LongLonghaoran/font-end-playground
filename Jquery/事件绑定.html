@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .d1 {
+            width: 500px;
+            height: 500px;
+            background-color:pink;
+        }
+        .d2 {
+            width: 100px;
+            height: 100px;
+            background-color: purple;
+            position: absolute;
+        }
+    </style>
+    <script src="jquery-3.4.1.js"></script> 
+    <script>
+        $(document).ready(function(){
+            console.log("document.ready");
+            // 事件处理函数中，如果想组织事件冒泡就使用e.stopPropagation() 如果想组织默认行为，就使用e.preventDefault(),如果既想阻止冒泡又想组织默认行为，函数最后一定要返回false
+            // 1.on方法 jquery对象.on(事件名称[, 选择器][, data传递给事件处理函数的参数], fn事件处理函数))
+            // 在元素中绑定一个或多个事件处理函数
+            /**
+             * 1.事件名称,可以同时绑定多个事件，将多个事件名称用空格连接即可 "click mouseenter dbclick"
+             * 2.选择器: 可以在注册事件的选择器的内部进一步用选择器来选择目标元素
+             * 3.传递给事件处理函数的参数，可以在事件处理函数内部通过evet.data获取，注意event需要在事件函数的形参位置进行声明，否则只能通过arguments来获取
+             * 4.function事件处理函数,函数仍然是绑定在dom对象上的，意味这函数中的this仍然是dom对象，而非jquery对象,参数部分，可以通过arguments[0]来获取事件对象
+             * 
+             * 也可以给一个元素多次调用on方法，来注册事件，多个事件可以同时触发，而不会覆盖
+            */
+            // $(document).on("click mouseenter", "#btn", function(){
+            //     $("div").html($("div").html() + "----这次触发的是"+arguments[0].type + "<br>")
+            // });
+            // $("#btn").on("click", 1, function(e){
+            //     $("div").html($("div").html() + "----通过on方法给按钮注册了事件<br>");
+            //     console.log(e);
+            // });
+            /**
+             * off方法，在选择元素上移除一个或多个事件的事件处理函数
+             * off()方法不带参数就移除所有绑定在元素上的事件
+             * 参数:
+             *  events,[selector],[fn]
+                events:一个或多个空格分隔的事件类型和可选的命名空间，或仅仅是命名空间，比如"click", "keydown.myPlugin", 或者 ".myPlugin".
+
+                selector:一个最初传递到.on()事件处理程序附加的选择器。
+
+                fn:事件处理程序函数以前附加事件上，或特殊值false.
+             * 
+            */
+        //    $(document).off();
+           /**
+            * bind方法,jquery3.0已废弃此方法
+            * 
+            * 
+           */
+        //   $("#btn").bind("click", function(){console.log('通过bind方法注册的事件')};
+        //   $(".d1,.d2").bind("click", function(){
+        //     arguments[0].stopPropagation();
+        //     console.log("bung");
+        //   })
+
+        // })
+        /**
+         * one为匹配元素绑定一个一次性的事件处理函数
+         * 规则与bind一直
+         * 
+        */
+            // $(document).on("click", ".d2, .d1", function(e){
+            //     console.log("触发了"+e.type+"事件");
+            // });
+        /**
+         * trigger 用户触发某类事件,如果浏览器某些事件有默认行为，则也会一同触发，比如a标签的跳转,form的提交跳转
+         * 
+        */
+            $(".d2").on("myEvent", function(e){
+                console.log("这次触发了"+e.type)
+            }).trigger("myEvent");
+        });
+    </script>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <div class='d1'>
+        <div class="d2"></div>
+    </div>
+</body>
+</html>
