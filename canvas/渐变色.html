@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        var ctx = document.querySelector("canvas").getContext("2d");
+        var grd = ctx.createLinearGradient(0, 0, 200, 0);
+        grd.addColorStop(0, "blue");
+        grd.addColorStop(1, "red"); 
+        ctx.fillStyle = grd;
+        ctx.fillRect(10, 10, 150, 80)
+    </script>
+</body>
+</html>

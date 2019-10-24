@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.less" type="text/less">
+  <script>
+      // less的初始化参数
+      less = {
+          env: "development",
+          logLevel: 2,
+          async: false,
+          fileAsync: false,
+          poll: 1000,
+          functions: {},
+          dumpLineNumbers: "mediaquery",
+          relativeUrls: false,
+          globalVars: {
+            var1: '"quoted value"',
+            var2: 'regular value'
+          },
+          rootpath: ":/a.com/"
+        };
+  </script>
+  <script src="js/less.js"></script>
+  <script>
+    less.watch();
+  </script>
+</head>
+<body>
+  <div class="container">
+    <a href="javascript:;"></a>
+    <input type="search">
+    <a href="javascript:;"></a>
+  </div>
+</body>
+</html>

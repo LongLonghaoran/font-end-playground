@@ -1,0 +1,6 @@
+@import url('./second.css') (max-width: 680px);
+.d1 {
+    width: 50%;
+    height: 200px;
+    background-color: pink;
+}

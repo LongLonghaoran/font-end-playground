@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="template-web.js"></script>
+    <script>
+        var data = [
+            {
+                name: '龙浩然',
+                age: 18
+            },
+            {
+                name: '龙浩然',
+                age: 19
+            },
+            {
+                name: '龙浩然',
+                age: 20
+            },
+        ]
+        template.defaults.debug = true
+
+        var html = template('tpl-user', {
+                users: data
+            });
+    </script>
+    <script id="tpl-user" type="text/html">
+        {{each $data }}
+            {{$value.name}}
+        {{/each }}
+    </script>
+</body>
+</html>

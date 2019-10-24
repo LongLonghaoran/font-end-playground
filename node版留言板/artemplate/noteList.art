@@ -1,0 +1,6 @@
+<ul class="list-group">
+  {{ $imports.log('hello world') }}
+  {{ each notes }}
+    <li class="list-group-item">{{@ $value }}</li>
+  {{/each}}
+</ul>

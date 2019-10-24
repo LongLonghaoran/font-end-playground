@@ -1,0 +1,5 @@
+<table>
+    <% users.forEach(function(e){ %>
+        <%- include('user', {user: e}) %>
+    <% })%>
+</table>

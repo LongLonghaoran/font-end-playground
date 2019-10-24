@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <header class="header">
+      <div class="header-l"><img src="images/logo.png" alt=""></div>
+      <div class="header-r">
+        <button class="toggle_btn">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+      </div>
+    </header>
+    <aside class="sidebar">
+      <ul>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span></span></a></li>
+        <li><a href="#"><span class="menu_item_title">一级标题</span><span></span></a></li>
+      </ul>
+    </aside>
+    <main class="main">主体</main>
+    <footer class="footer">页脚</footer>
+  </div>
+  <script>
+    document.querySelector(".toggle_btn").addEventListener("click", function(){
+      // 单击展开按钮
+      // 如果激活的元素数量为0,说明没有元素是激活状态，则给他们加上激活class
+      if(document.querySelectorAll(".active").length == 0){
+        document.querySelector(".header").classList.add("active");
+        document.querySelector(".sidebar").classList.add("active");
+        document.querySelector(".main").classList.add("active");
+      }else{
+        // 如果存在激活的元素，则将已经激活的元素的active都去除
+        document.querySelectorAll(".active").forEach(function(element, index){
+          element.classList.remove("active");
+        });
+      }
+    });
+  </script>
+</body>
+</html>
