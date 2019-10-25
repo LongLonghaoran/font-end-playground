@@ -18,10 +18,10 @@
               aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="exampleModalLabel">新建留言</h4>
         </div>
-        <form action="addNote" remote="true" method="post"><div class="modal-body">
+        <form action="/addNote" remote="true" method="get"><div class="modal-body">
           <div class="form-group">
             <label for="content" class="control-label">内容:</label>
-            <input type="text" class="form-control" id="content">
+            <input type="text" class="form-control" id="content" name="content" required="required">
           </div>
           </div>
           <div class="modal-footer">
