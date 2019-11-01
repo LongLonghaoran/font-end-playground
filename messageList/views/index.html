@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/css/index.css">
+</head>
+<body>
+  <!-- 新建留言的模态框 -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">新建留言</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/messages" remote="true" method="post">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="content" class="control-label">内容:</label>
+              <input type="text" class="form-control" id="content" name="content" required="required">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">NodeJs留言板</a>
+  
+
+    <button type="button" class="btn btn-outline-primary navbar-btn pull-right" data-toggle="modal" data-target="#exampleModal">添加留言</button>
+
+  </nav>
+
+  <div class="container" id="noteList">
+    <ul class="list-group">
+      {{ each notes }}
+      <li class="list-group-item">{{@ $value }}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src='/public/js/index.js'></script>
+</body>
+</html>
