@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>关于过渡</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <style>
+    h3 {
+      font-size: 20px;
+    }
+    .v-leave-to,
+    .v-enter {
+      font-size: 20px;
+    }
+    .v-leave-active,
+    .v-enter-active {
+      font-size: 100px;
+      transition: all 1s linear;
+    }
+    .v-leave,
+    .v-enter-to {
+      font-size: 20px;
+    }
+    /* .v-leave {
+      font-size: 20px;
+      transition: all 1s linear;
+    }
+    .v-leave-active {
+      font-size: 100px;
+      transition: all 1s linear;
+    }
+    .v-leave-to {
+      font-size: 200px;
+      transition: all 1s linear;
+    } */
+  </style>
+</head>
+<body>
+  <div id="app">
+    <button @click="flag=!flag">触发</button>
+    <transition :duration="{ enter: 5000, leave: 8000 }">
+    <h3 v-if="flag">123</h3>
+    </transition>
+    <button @click="flag2=!flag2">触发2</button>
+    <transition   v-bind:css="false"
+      v-on:before-enter="beforeEnter"
+      v-on:enter="enter"
+      v-on:after-enter="afterEnter"
+      v-on:enter-cancelled="enterCancelled"
+
+      v-on:before-leave="beforeLeave"
+      v-on:leave="leave"
+      v-on:after-leave="afterLeave"
+      v-on:leave-cancelled="leaveCancelled">
+      <h3 v-if="flag2">文本2</h3>
+    </transition>
+    <transition>
+      <button v-bind:key="docState">
+        {{ buttonMessage }}
+      </button>
+    </transition>
+  </div>
+  <script>
+    // 四种过渡方式
+    // 在 CSS 过渡和动画中自动应用 class
+    // 可以配合使用第三方 CSS 动画库，如 Animate.css
+    // 在过渡钩子函数中使用 JavaScript 直接操作 DOM
+    // 可以配合使用第三方 JavaScript 动画库，如 Velocity.js
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        flag: true,
+        flag2: true,
+        docState: 'saved'
+      },
+      methods: { // --------
+        // 进入中
+        // --------
+
+        beforeEnter: function (el) {
+          // ...
+          console.log('beforeEnter');
+          console.log(el);
+        },
+        // 当与 CSS 结合使用时
+        // 回调函数 done 是可选的
+        enter: function (el, done) {
+          // ...
+          console.log('enter');
+          done()
+        },
+        afterEnter: function (el) {
+          // ...
+          console.log('afterEnter');
+        },
+        enterCancelled: function (el) {
+          // ...
+          console.log('enterCancelled');
+        },
+
+        // --------
+        // 离开时
+        // --------
+
+        beforeLeave: function (el) {
+          // ...
+          console.log('beforeLeave');
+        },
+        // 当与 CSS 结合使用时
+        // 回调函数 done 是可选的
+        leave: function (el, done) {
+          // ...
+          console.log('leave');
+          done()
+        },
+        afterLeave: function (el) {
+          // ...
+          console.log('afterLeave');
+        },
+        // leaveCancelled 只用于 v-show 中
+        leaveCancelled: function (el) {
+          // ...
+          console.log('leaveCancelled');
+        }
+      },
+      computed: {
+        buttonMessage: function () {
+          switch (this.docState) {
+            case 'saved': return 'Edit'
+            case 'edited': return 'Save'
+            case 'editing': return 'Cancel'
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
