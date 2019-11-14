@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+  <script src="../vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <router-link to="/login">登录</router-link>
+    <router-link to="/register">注册</router-link>
+    <button @click="jump">通过按钮跳转到注册</button>
+    <router-view></router-view>
+  </div>
+  <script>
+    var com1 = {
+      template: "<h1>登录 {{ $route.params.name }} </h1>"
+    }
+    var com2 = {
+      template: "<h1>注册</h1>"
+    }
+    var routes = [
+      {
+        path: "/login/:name",
+        component: com1
+      },
+      {
+        path: "/register",
+        component: com2
+      }
+    ]
+    
+    var routerObj = new VueRouter({
+      routes
+    });
+
+    var vm = new Vue({
+      router: routerObj,
+      methods: {
+        jump(){
+          this.$router.push("/register")
+        }
+      }
+    }).$mount("#app")
+  </script>
+</body>
+</html>

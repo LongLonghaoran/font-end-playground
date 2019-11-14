@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+  <script src="../vue-router.js"></script>
+</head>
+<body>
+  <template id="user">
+    <h1>
+    </h1>
+  </template>
+
+  <div id="app">
+    <router-link to="/users?name=longhr">展示用户信息</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    // 用户信息组件
+    var User = {
+      template: "#user",
+      computed: {
+      },
+      beforeCreate(){
+        console.log("子组件中的参数", this.$route.query);
+      }
+    }
+    // 路由 对象
+    var router = new VueRouter({
+      routes: [
+        {
+          path: "/users",
+          component: User
+        }
+      ]
+    })
+    var app = new Vue({
+      el: "#app",
+      router: router,
+      beforeCreate() {
+        console.log("父组件中的参数", this.$route.query);
+      }
+    })
+  </script>
+</body>
+</html>

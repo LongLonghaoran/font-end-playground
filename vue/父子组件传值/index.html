@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <template id="tmpl">
+    <div><h2 ref="title">h2元素</h2>
+      <h1>{{sonMsg}}</h1>
+      <h1>{{parentMsg}}</h1>
+      <button @click="clickHandler">调用父组件的方法</button>
+      <button @click="getDom">子组件获取页面上的dom元素</button>
+    </div>
+  </template>
+  <div id="app">
+    <h2 ref="title">h2元素</h2>
+    <com :parent-msg="msg" @func="show"></com>
+    <button @click="getDom">获取页面上的dom元素</button>
+  </div>
+  <script>
+    var com = {
+      data: function(){
+        return {
+          sonMsg: "这是子组件中的信息"
+        }
+      },
+      props: ["parentMsg"],
+      template: "#tmpl",
+      methods: {
+        clickHandler(){
+          this.$emit('func');
+        },
+        getDom: function () {
+          console.log(this.$refs.title)
+        }
+      }
+    }
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        msg: "这是父组件中的信息"
+      },
+      methods: {
+        show(){
+          console.log("父组件中的show方法被调用了");
+        },
+        getDom: function () {
+          console.log(this.$refs.title)
+        }
+      },
+      components: {
+        com
+      }
+    })
+  </script>
+</body>
+</html>

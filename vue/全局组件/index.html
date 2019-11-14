@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <template id="username">
+    <input type="text" placeholder="用户姓名" :value="name">
+  </template>
+  <div id="app">
+    <username></username>
+  </div>
+  <script>
+    Vue.component('username', {
+      template: "#username",
+      data: () => {
+        return {
+          name: 'longhr'
+        }
+      }
+    });
+    new Vue({
+      el: "#app"
+    })
+  </script>
+</body>
+</html>

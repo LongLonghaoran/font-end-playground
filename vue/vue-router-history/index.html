@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <style>
+    .v-before-enter,
+    .v-leave-to {
+      opacity: 0
+    }
+    .v-enter,
+    .v-leave {
+      opacity: 1;
+      transition: all .5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <router-link to="/index" tag="button">首页</router-link>
+    <router-view></router-view>
+  </div>
+
+  <script>
+    var Index = {
+      template: `<div>
+          <h1>首页</h1>
+          <router-link to="/index/login" tag="button">登录</router-link>
+          <router-link to="/index/register" tag="button">注册</router-link>
+          <transition mode='out-in'>
+            <router-view></router-view>
+            <component :is='comName'></component>
+          </transition>
+        </div>`
+    }
+    var Login = {
+      template: "<h1>登录页</h1>"
+    }
+    var Register = {
+      template: "<h1>注册页</h1>"
+    }
+    var NotFound = {
+      template: "<h1>路径不存在</h1>"
+    }
+
+    var router = new VueRouter({
+      mode: "history",
+      routes: [
+        {
+          path: "/",
+          redirect: "/index"
+        },
+        {
+          path: "/index",
+          component: Index,
+          children: [
+            {
+              path: "login",
+              component: Login
+            },
+            {
+              path: "register",
+              component: Register
+            }
+          ]
+        },
+        {
+          path: "/*",
+          component: NotFound
+        }
+      ]
+    })
+    var app = new Vue({
+      el: "#app",
+      data: {
+        comName: ''
+      },
+      router: router
+    })
+  </script>
+</body>
+</html>

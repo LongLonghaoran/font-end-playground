@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <template id="navBar">
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <div class=" navbar-collapse" id="navbarSupportedContent">
+          <form class="form-inline my-2" @submit.prevent="add">
+            <input class="form-control mr-sm-2" type="search" placeholder="请输入笔记" aria-label="Search" v-model="note">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">添加</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </template>
+  <div id="app">
+    <nav-bar @add="add"></nav-bar>
+    <div class="container">
+      <table class="table table-hover">
+        <tbody>
+          <tr v-for="item in list">
+            <td>{{item}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    var navBar = {
+      template: "#navBar",
+      data: function(){
+        return {
+          note: ''
+        };
+      },
+      methods: {
+        add(event){
+          event.preventDefault();
+          console.log(this.note);
+          
+          this.$emit("add", this.note);
+          this.note = ''
+        }
+      }
+    }
+    var app = new Vue({
+      el: "#app",
+      data: {
+        list: []
+      },
+      methods: {
+        add(note){
+          this.list.push(note);
+        }
+      },
+      components: {
+        navBar
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>嵌套路由+命名视图该怎么做</title>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+  <template id="home">
+    <div>
+      <h1>这是首页</h1>
+    </div>
+  </template>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+  <script>
+    // 1.建立一个组件(建立模板对象)，充当父组件
+    var Home = {
+      template: "#home"
+    }
+    // 2.建立一个路由对象,匹配url路径与组件,在Vue实例容器中设置router-view
+    var routerObj = new VueRouter({
+      mode: "history",
+      routes: [
+        {
+          path: "/",
+          redirect: "/index2"
+        },
+        {
+          path: "/index2",
+          component: Home
+        }
+      ]
+    });
+    // 0.建立一个vue实例
+    var app = new Vue({
+      el: "#app",
+      data: {},
+      router: routerObj,
+      beforeCreate() {
+        console.log(this.$route)
+      }
+    })
+    // 3.建立子组件模板对象
+    
+    // 4.在父组件路由对象中添加children属性，用于绑定子组件
+    
+  </script>
+</body>
+</html>
