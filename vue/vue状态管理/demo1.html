@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <script>
+    // 普通的共有数据
+    // var commonData = {
+    //     name: 'longhr'
+    // }
+    // var v1 = new Vue({
+    //   data: commonData
+    // })
+    // var v2 = new Vue({
+    //   data: commonData
+    // })  
+
+    // store模式
+    var store = {
+      debug: true,
+      state: {
+        message: 'Hello!'
+      },
+      setMessageAction(newValue) {
+        if (this.debug) console.log('setMessageAction triggered with', newValue)
+        this.state.message = newValue
+      },
+      clearMessageAction() {
+        if (this.debug) console.log('clearMessageAction triggered')
+        this.state.message = ''
+      }
+    }
+    var vmA = new Vue({
+      data: {
+        privateState: {},
+        sharedState: store.state
+      }
+    })
+
+    var vmB = new Vue({
+      data: {
+        privateState: {},
+        sharedState: store.state
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="sea.js"></script>
+</head>
+<body>
+  <script>
+      // 配置路径
+      seajs.config({
+        // paths: {
+        //   'jquery': 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1'
+        // },
+        // 设置别名，方便调用
+        alias: {
+          'jquery': 'https://code.jquery.com/jquery-3.4.1'
+        }
+      })
+      seajs.use(['jquery', 'a'], function(jquery, a){
+        console.log(jquery)
+        console.log(a)
+        // $("<h1>引用Jquery的模块必须在这里调用</h1>").appendTo($(document.body));
+      });
+  </script>
+</body>
+</html>
