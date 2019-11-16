@@ -1,35 +1,21 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} =  require('clean-webpack-plugin');
-const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
 module.exports = {
-  mode: 'development',
   entry: {
-    app: './src/index.js'
+    index: './src/index.js',
+    another: './src/another_module.js'
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
+  optimization: {
+    splitChunks: true
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'Output Management'
-    }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new HTMLWebpackPlugin({
+      title: 'Code Splitting'
+    })
   ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   }
-}
+};
