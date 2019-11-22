@@ -1,0 +1,65 @@
+0.晨会
+	
+1.npm包中的@是什么意思
+	可以合法存在于包名之中
+2.babel
+	Babel 工具链是由大量的工具组成的，无论你是 “最终用户” 还是在集成 Babel，这些工具都简化了 Babel 的使用。	本文是对这些工具的使用方法的快速介绍，你可以在文档的 “用法” 章节了解到更多信息。
+
+	关于babel包名中的@符号
+    你所需要的所有的 Babel 模块都是作为独立的 npm 包发布的，并且（从版本 7 开始）都是以 @babel 作为冠名	
+    的。这种模块化的设计能够让每种工具都针对特定使用情况进行设计。 下面我们着重看一下 @babel/
+    core 和 @babel/cli
+
+  @babel/core
+	  作为一名最终用户，你可以还需要安装其他工具作为 @babel/core 的使用接口并很好地集成到你的开发流程中。即便如此，你仍然需要查看其文档并了解可用的参数，其中很多参数也可以通过其他工具进行设置。
+
+  @babel/cli
+    @babel/cli 是一个能够从终端（命令行）使用的工具。下面是其安装命令和基本用法：
+
+  配置Babel:
+    babel.config.js
+    在项目的根目录（package.json 文件所在目录）下创建一个名为 babel.config.js 的文件，并输入如下内容。
+
+    module.exports = {
+      "presets": [...],
+      "plugins": [...]
+    }
+  插件和预设:
+
+    代码转换以插件的形式出现，插件是小型 JavaScript 程序，它指示 Babel 如何对代码进行转换。你甚至可以编写自己的插件来应用你想要的任何代码转换。要将ES2015+ 语法转换为 ES5，我们可以依赖官方插件，如 @babel/plugin-transform-arrow-functions：
+
+    npm install --save-dev @babel/plugin-transform-arrow-functions
+
+    ./node_modules/.bin/babel src --out-dir lib --plugins=@babel/plugin-transform-arrow-functions
+
+    
+    现在我们代码中的所有箭头函数都将转换为 ES5 兼容函数表达式：
+
+    const fn = () => 1;
+
+    // converted to
+
+    var fn = function fn() {
+      return 1;
+    };
+
+    
+    这是一个好的开始！如果想要转换代码中还有其他 ES2015+ 功能。我们可以使用 "preset" 来代替预先设定的一组插件，而不是逐一添加我们想要的所有插件。
+
+    就像使用 plugins 一样，你也可以创建自己的 preset，分享你需要的任何插件组合。在这个例子中，我们使用了 env preset。
+
+    npm install --save-dev @babel/preset-env
+
+    ./node_modules/.bin/babel src --out-dir lib --presets=@babel/env
+
+    
+    没有任何配置，这个 preset 包括支持现代 JavaScript（ES2015，ES2016 等）的所有插件。但是 presets 也可以选择。我们不从终端传入 cli 和 preset 选项，而是通过另一种传入选项的方式：配置文件。
+
+  什么是babel/pollify?
+
+  babel/preset-env有什么作用?
+
+
+在weback中使用babel:    babel-loader, 并且通过loade配置对象中的options来指定babel配置的选项
+  https://webpack.docschina.org/loaders/babel-loader/
+
