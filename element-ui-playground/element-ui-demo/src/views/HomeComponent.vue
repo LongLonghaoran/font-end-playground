@@ -1,50 +1,43 @@
 <template>
   <div>
-    <el-container direction="horizontal">
-      <el-aside width="200px">
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo">
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span slot="title">导航一</span>
-            </template>
-            <el-menu-item-group>
-              <span slot="title">分组一</span>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <span slot="title">选项4</span>
-              <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
-        </el-menu>
-      </el-aside>
-      <el-main class="main">
-        <h2>这是主体部分</h2>
-        <p v-text="$root.current_user"></p>
-      </el-main>
-    </el-container>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        {{ $root.current_user.name }}
+      </a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+          {{ $root.current_user.current_school_name }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button class="dropdown-item" v-for="item in $root.schools" :key="item.value" @click="changeSchool(item.value)">{{ item.text }}</button>
+        </div>
+      </div>
+    </nav>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
-  components: {
+  methods: {
+    changeSchool(school_id){
+      let _this = this
+      axios.get(
+        'users/change_school',
+        {
+        params: {
+          school_id: school_id,
+          token: window.localStorage.getItem('token')
+        }}
+      ).then(function(result){
+          if (result.data.result) {
+            _this.$root.current_user = result.data.user
+            window.localStorage.setItem('token', result.data.user.token)
+            console.log("切换成功")
+          } else {
+            console.log('切换失败', result.data.msg);
+          }
+      })
+    }
   }
 }
 </script>

@@ -5,7 +5,7 @@
       <span>登录</span>
     </div>
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-4">
+      <div class="col-md-4 col-sm-6">
         <div class="card">
           <div class="card-body">
             <form @submit.prevent="submit">
@@ -38,17 +38,20 @@ export default {
   },
   methods: {
     submit(){
+      let _this = this
       axios.post(
         'users/login_by_pwd',
         {
-          username: this.uname,
-          password: this.password
-        })
-        .then(result => {
+          username: _this.uname,
+          password: _this.password
+        }
+      ).then(function(result){
           if (result.data.result) {
-            this.$root.current_user = result.data.user
+            _this.$root.schools = result.data.schools
+            _this.$root.current_user = result.data.user
             window.localStorage.setItem('token', result.data.user.token)
-            this.$router.push({path: '/'})
+            window.localStorage.setItem('schools', JSON.stringify(result.data.schools))
+            _this.$router.push({path: '/'})
           } else {
             console.log('登录失败');
           }

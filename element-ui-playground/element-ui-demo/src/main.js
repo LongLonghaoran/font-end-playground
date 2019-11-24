@@ -21,7 +21,8 @@ Vue.config.productionTip = false
 
  new Vue({
   data: {
-    current_user: null
+    current_user: null,
+    schools: []
   },
   render: h => h(App),
   router
