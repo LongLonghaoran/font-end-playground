@@ -14,7 +14,7 @@ const router = new VueRouter({
   ]
 })
 router.beforeEach((to, from, next) => {
-  if (!JSON.parse(window.localStorage.getItem('current_user')) && to.fullPath !== '/login') {
+  if (!router.app.current_user && to.fullPath !== '/login') {
     next({
       path: '/login'
     })

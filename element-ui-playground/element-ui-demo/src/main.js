@@ -6,7 +6,12 @@ import router from './router.js'
 
 import App from './App.vue'
 
+// element-ui插件
 import './plugins/element.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// 安装bootstrap
+import 'bootstrap';
 
 import axios from 'axios'
 axios.defaults.baseURL = 'http://oa-test.wfl-ischool.cn/dingding_api'
@@ -17,23 +22,6 @@ Vue.config.productionTip = false
  new Vue({
   data: {
     current_user: null
-  },
-  mounted(){
-    axios.post(
-      'users/login_by_pwd',
-      {
-        username: 'wfl_longhr',
-        password: '123qwe'
-      })
-      .then(result => {
-        if (result.data.result) {
-          this.current_user = result.data.user
-          window.localStorage.setItem('current_user', JSON.stringify(result.data.user))
-        } else {
-          window.localStorage.setItem('current_user', JSON.stringify({}))
-          console.log('登录失败');
-        }
-    })
   },
   render: h => h(App),
   router
