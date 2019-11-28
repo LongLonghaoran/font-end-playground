@@ -17,6 +17,13 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://oa-test.wfl-ischool.cn/dingding_api'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
+import layout from './components/layout.vue'
+
+Vue.component(
+  'layout',
+  layout
+)
+
 Vue.config.productionTip = false
 
  new Vue({

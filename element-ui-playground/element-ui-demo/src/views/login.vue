@@ -53,6 +53,7 @@ export default {
             window.localStorage.setItem('schools', JSON.stringify(result.data.schools))
             _this.$router.push({path: '/'})
           } else {
+            _this.$message.error(`${result.data.msg}`);
             console.log('登录失败');
           }
       })
